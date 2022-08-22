@@ -9,4 +9,4 @@ while [ "$COUNTER" -lt 10 ]; do
 	echo "Hi"
       fi
       COUNTER=$((COUNTER+1))
-d0one
+done
