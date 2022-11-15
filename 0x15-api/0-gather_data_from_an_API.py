@@ -1,8 +1,11 @@
 #!/usr/bin/python3
-"""Return to-do list information for a given employee ID."""
+"""
+Return to-do list information for a given employee ID.
+"""
 import requests
 import sys
 if __name__ == "__main__":
+    """ Program Entry point """
     id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(f"{url}users/{id}").json()
