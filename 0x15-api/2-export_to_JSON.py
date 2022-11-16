@@ -1,20 +1,17 @@
 #!/usr/bin/python3
-"""
-Return to-do list information for a given employee ID
-"""
+"""Returns to-do list information for a given employee ID."""
 import json
+from urllib import request
 import requests
 import sys
+
 if __name__ == "__main__":
-    """ Program Entry point """
-    id = sys.argv[1]
+    u_id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(f"{url}users/{id}").json()
-    todos = requests.get(f"{url}todos", params={"userId": id}).json()
-    with open(f'{id}.json', 'w') as fich:
-        json.dump({
-            id: [{
-                "task": todo['title'],
-                "completed": todo['completed'],
-                "username": user['name']}
-                 for todo in todos]}, fich)
+    user = requests.get(url+"users/{}".format(u_id)).json()
+    username = user.get("username")
+    todos = requests.get(url+"todos", params={"userId": u_id}).json()
+
+    with open("{}.json".format(u_id), "w") as jsonfile:
+        json.dump({u_id: [{"task": t.get("title"), "completed": t.get(
+            "completed"), "username": username} for t in todos]}, jsonfile)
